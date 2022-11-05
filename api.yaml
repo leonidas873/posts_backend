@@ -1,0 +1,270 @@
+openapi: 3.0.0
+info:
+  title: posts
+  description: posts swagger
+  version: 0.1.9
+servers:
+  - url: http://localhost:8000
+    description: local server
+  - url: http://host.com
+    description: remote server
+
+paths:
+  /api/posts/getAllPosts:
+    get:
+      tags: [Posts]
+      summary: Returns a list of posts.
+      description: returning array of objects.
+      responses:
+        '200':    # status code
+          description: success
+          content:
+            application/json:
+              schema: 
+                type: array
+                items: 
+                  type: object
+                  properties:
+                    id: 
+                      type: string
+                    title: 
+                      type: string
+                    text: 
+                      type: string
+                    likes: 
+                      type: integer
+                    createdAt: 
+                      type: string  
+                    updatedAt: 
+                      type: string  
+        '400': # status code
+          description: request error
+        '500': 
+          description: internal server error  
+  /api/posts/getSinglePostById{id}:
+    get:
+      tags: [Posts]
+      summary: Returns a single post by id.
+      description: returning a object.
+      parameters:
+        - name: postId
+          in: path
+          required: true
+      responses:
+        '200':    # status code
+          description: success
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                    id: 
+                      type: string
+                    title: 
+                      type: string
+                    text: 
+                      type: string
+                    likes: 
+                      type: integer
+                    createdAt: 
+                      type: string  
+                    updatedAt: 
+                      type: string  
+        '404': # status code
+          description: no such post
+        '500': 
+          description: internal server error  
+  /api/posts/addPost:
+    post:
+      tags: [Posts]
+      summary: adds a single post by id.
+      description: adding an object.
+      requestBody:
+          required: true
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  title:
+                    type: string
+                  text:
+                    type: string  
+      responses:
+        '200':    # status code
+          description: success
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                    id: 
+                      type: string
+                    title: 
+                      type: string
+                    text: 
+                      type: string
+                    likes: 
+                      type: integer
+                    createdAt: 
+                      type: string  
+                    updatedAt: 
+                      type: string  
+        '400': # status code
+          description: no such post
+        '500': 
+          description: internal server error         
+  /api/posts/deleteSinglePostById{id}:
+    delete:
+      tags: [Posts]
+      summary: deletes post by id.
+      description: returning a object.
+      parameters:
+        - name: postId
+          in: path
+          required: true
+      responses:
+        '200':    # status code
+          description: success
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                    id: 
+                      type: string
+                    title: 
+                      type: string
+                    text: 
+                      type: string
+                    likes: 
+                      type: integer
+                    createdAt: 
+                      type: string  
+                    updatedAt: 
+                      type: string  
+        '404': # status code
+          description: no such post
+        '500': 
+          description: internal server error            
+  /api/posts/updateSinglePostById/{id}:
+    patch:
+      tags: [Posts]
+      summary: updates post by id.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                    title: 
+                      type: string
+                    text: 
+                      type: string
+      description: returning a object.
+      parameters:
+        - name: postId
+          in: path
+          required: true
+      responses:
+        '200':    # status code
+          description: success
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                    id: 
+                      type: string
+                    title: 
+                      type: string
+                    text: 
+                      type: string
+                    likes: 
+                      type: integer
+                    createdAt: 
+                      type: string  
+                    updatedAt: 
+                      type: string  
+        '404': # status code
+          description: no such post
+        '500': 
+          description: internal server error  
+
+
+/api/posts/getAllPostsByUserId:
+    patch:
+      tags: [Posts]
+      summary: updates post by id.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                    title: 
+                      type: string
+                    text: 
+                      type: string
+      description: returning a object.
+      parameters:
+        - name: postId
+          in: path
+          required: true
+      responses:
+        '200':    # status code
+          description: success
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                    id: 
+                      type: string
+                    title: 
+                      type: string
+                    text: 
+                      type: string
+                    likes: 
+                      type: integer
+                    createdAt: 
+                      type: string  
+                    updatedAt: 
+                      type: string  
+        '404': # status code
+          description: no such post
+        '500': 
+          description: internal server error  
+
+
+components:
+  schemas:
+    Post:
+      type: object
+      properties:
+        id: 
+          type: string
+          example: 'someid'
+        title: 
+          type: string
+          example: 'ჩემი ჩუმი ჩაფიქრი'
+        text:
+          type: string    
+          example: 'იყო და არა იყო რა'
+      required:
+        - title
+        - text
+
+  securitySchemes:
+    httpBearer:
+      type: http
+      scheme: bearer
+security:
+  - httpBearer: []
+tags:
+  - name: Auth
+    description: ''
+  - name: Posts
+    description: ''

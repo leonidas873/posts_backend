@@ -1,0 +1,28 @@
+GET http://localhost:8000/api/posts/getAllPosts
+
+###
+
+POST http://localhost:8000/api/auth/login
+
+Content-Type: application/json
+{
+    "email":"leo13@gmail.com",
+    "password":"paroli1"
+}
+
+###
+
+POST http://localhost:8000/api/auth/signup
+
+Content-Type: application/json
+
+{
+    "email": "leosdfsed13@gmail.com",
+    "password": "paroli1"
+}
+
+### 
+
+GET http://localhost:8000/api/posts/getAllPosts
+
+Content-Type: application/json
